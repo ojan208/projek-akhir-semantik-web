@@ -21,20 +21,21 @@ app.get('/', async (req, res) => {
     try {
         const response = await rdfFetchDataFromFuseki();
         console.log('response : ', response)
-        const jsonData = JSON.stringify(response, null, 3);
-        const results = decode(jsonData);
-        // const parsedData = JSON.parse(results);
-        console.log('results : ',results)
+        // const jsonData = JSON.stringify(response, null, 3);
+        // const results = decode(jsonData);
+        // // const parsedData = JSON.parse(results);
+        // console.log('results : ',results)
         // var decodedData = decodeHTMLEntities(jsonData);
         // console.log('decoded Data : ', decodedData)
         // console.log('parsed Data : ', parsedData)
 
         // console.log('response data in app.js : ', jsonData)
         // Send the JSON data as plain text
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Content-Type', 'text/plain');
         // res.send(jsonData);
         // console.log(jsonData)
-        res.render('index', {data: (results)});
+        res.render('index', {data: (response)});
+        // res.json(jsonData)
     } catch (error) {
         console.error('Error fetching data from Fuseki:', error);
         res.status(500).send('Error fetching data from Fuseki');
@@ -53,13 +54,9 @@ app.get('/fetch-data', async (req, res) => {
         // res.send(jsonData);
         // console.log(jsonData)
 
-        var contoh = {
-            "bookId": "http://www.katalog-buku.com/list#B10",
-            "title": "Screenplay",
-            "author": "Syd Field",
-            "rating": "4.5"
-          }
-        res.render('index', {data: results});
+        
+        // res.render('index', {data: results});
+        res.json(results)
     } catch (error) {
         console.error('Error fetching data from Fuseki:', error);
         res.status(500).send('Error fetching data from Fuseki');
