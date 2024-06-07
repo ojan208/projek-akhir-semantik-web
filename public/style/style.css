@@ -1,9 +1,9 @@
 * {
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -15,7 +15,14 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
-    
+}
+
+.nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
 }
 
 .logo {

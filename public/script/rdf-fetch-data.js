@@ -2,7 +2,9 @@ import $rdf  from 'rdflib';
 import fetch  from 'node-fetch';
 
 
-const rdfFetchDataFromFuseki = async () => {
+const rdfFetchDataFromFuseki = async (page) => {
+    const itemsPerPage = 20
+    const offset = (page - 1) * itemsPerPage
     try {
         const store = $rdf.graph()
         const fetcher = new $rdf.Fetcher(store, {fetch : fetch});
@@ -22,7 +24,8 @@ const rdfFetchDataFromFuseki = async () => {
                     kata:writtenBy ?author;
                     kata:rated ?rating.
             }
-            LIMIT 10
+            LIMIT ${itemsPerPage} 
+            OFFSET ${offset}
             `;
         const fullUrl = `${rdf_enpoint}?query=${encodeURIComponent(query)}`
         

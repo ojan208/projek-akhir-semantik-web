@@ -15,26 +15,15 @@ app.use('/script', express.static(__dirname + "'public/script"))
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
-app.set('json spaces', 40);
+// app.set('json spaces', 40);
 
 app.get('/', async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
     try {
-        const response = await rdfFetchDataFromFuseki();
+        const response = await rdfFetchDataFromFuseki(page);
         console.log('response : ', response)
-        // const jsonData = JSON.stringify(response, null, 3);
-        // const results = decode(jsonData);
-        // // const parsedData = JSON.parse(results);
-        // console.log('results : ',results)
-        // var decodedData = decodeHTMLEntities(jsonData);
-        // console.log('decoded Data : ', decodedData)
-        // console.log('parsed Data : ', parsedData)
 
-        // console.log('response data in app.js : ', jsonData)
-        // Send the JSON data as plain text
-        res.setHeader('Content-Type', 'text/plain');
-        // res.send(jsonData);
-        // console.log(jsonData)
-        res.render('index', {data: (response)});
+        res.render('index', {data: (response), page});
         // res.json(jsonData)
     } catch (error) {
         console.error('Error fetching data from Fuseki:', error);
