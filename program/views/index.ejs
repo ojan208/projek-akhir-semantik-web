@@ -9,8 +9,12 @@
 </head>
 <body>
 
-    <nav class="nav">
-        <a href="/" class="logo">Serigala Awu Awu</a>
+    <nav class="navbar sticky-top navbar-light" style="background-color: #e3f2fd;">
+      <a href="/" class="navbar-brand">Serigala Awu Awu</a>
+      <form class="form-inline my-2 my-lg-0" action="http://localhost:3000" method="GET" id="searchForm">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="searchInput">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </nav>
 
     <div class="container">
@@ -40,6 +44,7 @@
                     <th>Title</th>
                     <th>Author</th>
                     <th>Rating</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +54,8 @@
                     <td><%= book.title %></td>
                     <td><%= book.author %></td>
                     <td><%= book.rating %></td>
+                    <!-- <td><button class="btn btn-secondary" onclick="redirectTo('<%= '/book/'+book.bookId %>')">Details </button></td> -->
+                    <td><a class="btn btn-primary" href="<%= '/book/'+book.bookId.substring(33) %>" role="button">Detail</a></td>
                 </tr>
                 <% }) %>
             </tbody>
@@ -73,5 +80,11 @@
     </div>
 
 </body>
-
+<script>
+  document.getElementById('searchForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var query = document.getElementById('searchInput').value;
+      window.location.href = 'http://localhost:3000/?search=' + encodeURIComponent(query);
+  });
+</script>
 </html> 

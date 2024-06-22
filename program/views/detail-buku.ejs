@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyek Akhir Semantik Web</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar sticky-top navbar-light" style="background-color: #e3f2fd;">
+        <a href="/" class="navbar-brand">Serigala Awu Awu</a>
+        <form class="form-inline my-2 my-lg-0" action="http://localhost:3000" method="GET" id="searchForm">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="searchInput">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+
+    <h2 class="page-title">Detail Buku</h2>
+   
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title"><%= data[0].title %></h1>
+                <h4 class="card-subtitle mb-2 text-muted">by <%= data[0].author %></h4>
+                <div class="mb-3">
+                    <strong>Rating:</strong> <%= data[0].rating %>/5
+                </div>
+                <div class="mb-3">
+                    <strong>Number of Ratings:</strong> <%= data[0].voterSum %>
+                </div>
+                <div class="mb-3">
+                    <strong>Price:</strong> <%= data[0].price %>
+                </div>
+                <h5 class="card-title">Description</h5>
+                <p class="card-text"><%= data[0].description %></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var query = document.getElementById('searchInput').value;
+        window.location.href = 'http://localhost:3000/?search=' + encodeURIComponent(query);
+    });
+</script>
+</html> 
